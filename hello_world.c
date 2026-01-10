@@ -1,4 +1,4 @@
-//арифметические действия над целочисленными переменными.
+//арифметические действия над вещественными переменными.
 //простая функция.
 //====================================================================
 
@@ -10,7 +10,7 @@ int main () {
 	int		min_fahr = 0;
 	int		max_fahr = 300;
 	int		step = 20;
-	int		celcius = 0;
+	float	celcius = 0;
 
 	
 	printf("char:  	%zu byte \n", sizeof(char) );
@@ -22,8 +22,8 @@ int main () {
 	printf("|    Farenheit     |     Celcius    |\n");
 	printf("-------------------------------------\n");
 	while( min_fahr <= max_fahr){
-		celcius = 5 * (min_fahr - 32) / 9;
-		printf("\t%-4d\t\t %-4d \n", min_fahr, celcius);
+		celcius = 5.0 * (min_fahr - 32) / 9.0;
+		printf("\t%-4d\t\t %-6.3f \n", min_fahr, celcius);
 		min_fahr += step;
 	}
 		
