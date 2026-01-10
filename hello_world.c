@@ -1,5 +1,5 @@
-//Объявление переменных.
-//вывод целочисленных переменных с разными спецификаторами.
+//арифметические действия над целочисленными переменными.
+//простая функция.
 //====================================================================
 
 //набор вставляемых файлов: стандартные или пользовательские библиотеки
@@ -7,24 +7,26 @@
 
 //заглавная функция
 int main () {
-	int		a1 = 0;
-	short	b1 = 0;
-	long	c1 = 0;
-	
-	c1 = 0xffffffff;
-	a1 = c1;
-	b1 = a1;
-	
-	printf("hello, world! \n");
-	printf("a1_dec = %-16d,\t a1_int = %-16i,\t a1_unsig = %-16u,\t a1_hex = %-x  \n",a1, a1, a1, a1); //выравнивание по левому краю
-	printf("b1_dec = %-16d,\t b1_int = %-16i,\t b1_unsig = %-16u,\t b1_hex = %-x  \n",b1, b1, b1, b1); 
-	printf("c1_dec = %-16d,\t c1_int = %-16i,\t c1_unsig = %-16u,\t c1_hex = %-x  \n",c1, c1, c1, c1); 
+	int		min_fahr = 0;
+	int		max_fahr = 300;
+	int		step = 20;
+	int		celcius = 0;
+
 	
 	printf("char:  	%zu byte \n", sizeof(char) );
 	printf("short: 	%zu byte \n", sizeof(short) );
 	printf("int: 	%zu byte \n", sizeof(int) );
 	printf("long: 	%zu byte \n", sizeof(long) );
 	printf("long long: 	%zu byte \n", sizeof(long long) );
+	printf("-------------------------------------\n");
+	printf("|    Farenheit     |     Celcius    |\n");
+	printf("-------------------------------------\n");
+	while( min_fahr <= max_fahr){
+		celcius = 5 * (min_fahr - 32) / 9;
+		printf("\t%-4d\t\t %-4d \n", min_fahr, celcius);
+		min_fahr += step;
+	}
+		
 	printf("\a \n");
 
 	return 0;
