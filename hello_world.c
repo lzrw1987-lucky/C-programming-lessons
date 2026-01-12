@@ -1,5 +1,9 @@
-//арифметические действия над вещественными переменными.
-//простая функция.
+//работа с массивами. Виды массивов:
+//	1. Одномерный / Многомерный.
+//	2. Динамический
+//	3. Константные.
+//	4. Строковые.
+//Индексом служит любое целочисленное выражение.
 //====================================================================
 
 //набор вставляемых файлов: стандартные или пользовательские библиотеки
@@ -7,27 +11,55 @@
 
 //заглавная функция
 int main () {
-	int		min_fahr = 0;
-	int		max_fahr = 300;
-	int		step = 20;
-	float	celcius = 0;
-
+	int		one_array [5] = {5,10,15,20,25};
+	int		multi_array [2][5] = {
+				{5,10,15,20,25},
+				{2, 4, 8,16,32}
+			};
+	int		dynamic_arr[] = {1, 2, 4, 8};	//обязательно должен быть проинициализирован при объявлении ? Да
+	const int	const_array[3] = {11, 22, 33};
+	char	sym_array[] = {"Hey"};
+	int		i, y;
+	int		rows = sizeof(multi_array) / sizeof(multi_array[0]);
+	int		cols = sizeof(multi_array[0]) / sizeof(multi_array[0][0]);
+	//----------------------------------
 	
-	printf("char:  	%zu byte \n", sizeof(char) );
-	printf("short: 	%zu byte \n", sizeof(short) );
-	printf("int: 	%zu byte \n", sizeof(int) );
-	printf("long: 	%zu byte \n", sizeof(long) );
-	printf("long long: 	%zu byte \n", sizeof(long long) );
-	printf("-------------------------------------\n");
-	printf("|    Farenheit     |     Celcius    |\n");
-	printf("-------------------------------------\n");
-	while( min_fahr <= max_fahr){
-		celcius = 5.0 * (min_fahr - 32) / 9.0;
-		printf("\t%-4d\t\t %-6.3f \n", min_fahr, celcius);
-		min_fahr += step;
+	printf("Hello, world!\n");
+	printf ("Put one array: \n");
+	for(i=0; i < ((sizeof(one_array)/sizeof(int))); i++){
+		printf("%d, ", one_array[i]);
 	}
-		
-	printf("\a \n");
+	printf("\n");
+	
+	printf ("Put multi array: \n");
+	for(i=0; i < ((sizeof(multi_array)/sizeof(multi_array[0]))); i++){
+		for(y = 0; y < (sizeof(multi_array[0])/sizeof(multi_array[0][0])); y++){
+			printf("%4d, ", multi_array[i][y]);
+		}
+		printf("\n");
+	}	
+	printf("\n");
+	printf ("Put multi array2: \n");
+	for(i=0; i < rows; i++){
+		for(y = 0; y < cols; y++){
+			printf("%4d, ", multi_array[i][y]);
+		}
+		printf("\n");
+	}	
+	printf("\n");
+	
+	printf ("Put dynamic array: \n");
+	for(i=0; i < ((sizeof(dynamic_arr))/sizeof(int)); i++){
+		printf("%d, ", dynamic_arr[i]);
+	}
+	printf("\n");
+
+	// const_array[0] = 10; Выдаст ошибку.
+	
+	printf ("Put char array: \n");
+	printf ("message: %s \n", sym_array);
+	
+	printf("\n");
 
 	return 0;
 }
