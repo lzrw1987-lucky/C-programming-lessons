@@ -15,7 +15,9 @@
 
 //заглавная функция
 int main () {
-	char		row[MAX_ROW] = {'a','b', 'c', 'd','f','g','h','\0'};
+	//char		row[MAX_ROW] = {'a','b', 'c', 'd','f','g','h','\0'};
+	//char		row[MAX_ROW] = "abcdfgh";
+	char		row[MAX_ROW] = {0};
 	int 		i;
 	
 	printf("Init state: %s \n",row);
