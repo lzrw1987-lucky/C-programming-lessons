@@ -9,6 +9,7 @@
 #include  "stdio.h"	
 #define		FMIN	1
 #define		FMAX	50
+#define		MAX_DEPTH	100
 //====================================================================
 
 
@@ -16,6 +17,7 @@
 void	func_if_else (void);		//работа с функцией "if-else" or "if- else if"
 void	func_switch	 (void);
 int		put_switch_code(int);		//преобразование значения переменной Х в какую-то константу.
+void	filter_char	(void);			//функция сохраняет строку из консоли, фильтруя некоторые символы.
 //====================================================================
 
 
@@ -23,8 +25,9 @@ int		put_switch_code(int);		//преобразование значения пе
 int main () {
 	
 	//**********************************
-	//func_if_else();
+	func_if_else();
 	func_switch();
+	filter_char();
 	
 	printf("\a \n");
 
@@ -38,7 +41,7 @@ void	func_if_else (){
 	int		x;
 	//**********************************
 	
-	printf("Hello! I'm if-else. \n");
+	printf("\n\tHello! I'm if-else. \n");
 	printf("Enter number between 1..50. \n");
 	scanf("%d", &x);
 	if(x < FMIN){
@@ -53,12 +56,13 @@ void	func_if_else (){
 //====================================================================
 
 
+//switch ... case
 void	func_switch (){
 	int		x;
 	int		i;
 	//**********************************
 	
-	printf("Hello! I'm switch. \n");
+	printf("\n\tHello! I'm switch. \n");
 	printf("Enter number between 50..100. \n");
 	scanf("%d", &x);
 	
@@ -93,5 +97,32 @@ int put_switch_code (int i_x){
 	else if( i_x < 50) return 3;
 	else if( i_x >=50 && i_x <=100) return 4;
 	else return 0;
+}
+//====================================================================
+
+
+//Фильтрация строки, введёной из консоли.
+void  filter_char (){
+	char	line [MAX_DEPTH] = {0};
+	int		i = 0;
+	int		symb = 0;
+	//**********************************
+
+	printf("\n\tHello! I'm filter char. \n");	
+	while ( i < 7/* (MAX_DEPTH-1) */ ) {
+		symb = getchar( );
+		if (symb == EOF ) break;			//досрочное прерывание цикла "while"
+		else if(symb == '\n' || symb == '\t')continue;
+		else if( symb == 'A' || symb == 'a') continue;
+		else if( symb == 'B' || symb == 'b') continue;
+		else if( symb == '0' || symb == '1') continue;
+		else if( symb == '2' || symb == '3') continue;
+		else line[i] = symb;
+		
+		++i;
+	}
+	printf("The complete while_loop. i=%d \n ", i);	
+	line[i] = '\0';
+	printf("\nResult_line: %s. \n", line);
 }
 //====================================================================
