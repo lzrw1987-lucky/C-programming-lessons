@@ -13,64 +13,104 @@
 
 
 /*	внешние переменные и объявление функций	*/
-void	change (int *pa);		//функция меняет переменные в программе без создания копий.
+void	defin_func ( );			//объявить указатель и переменную. вывести результаты работы на ними.
+void	arg_func (int *pa);		//указатель как аргумент функции. Т.е. функция меняет переменные в программе без создания копий.
+void	array_func();			//указатель и массив.
 int		*retu_func ();
-int		login_check();			//указатель и массив: на примере проверки массива.
 //====================================================================
 
 
 
 /*	Основная программа */
 void	main(){
-	int 	*ptr;			//объявление указателя
+	int 	*ptr = NULL;	//объявление указателя
 	int		var1 = 10;		//определение переменной
 	//----------------------------------
 	
-	//ptr = &var1;
-	//printf("Hello! I'm program with pointers. \n");
-	//printf("Var1 = %d. *ptr = %d. ptr = %d. \n", var1, *ptr, ptr);
-	//printf("Func \"change\". \n");
-	//change(&var1);
-	//printf("Var1 = %d. *ptr = %d. ptr = %d. \n", var1, *ptr, ptr);
-	login_check( );
+	
+	printf("Hello! This is pointer branch. \n");
+	defin_func ();
+	arg_func(&var1);
+	printf("Data_var1 = %d. address_var = %p. \n", var1, &var1);
+	array_func( );
+	
+	printf("\a");
+}
+//====================================================================
+
+
+/* указатель - переменная, которая хранит адрес другого объекта в ОЗУ */
+void defin_func(){
+	int		var0;
+	int		var1;
+	int		*ptr;			//объявление указателя
+	//----------------------------------
+
+	printf("\n    This is \"define_func\" \n");
+	var0 = 10;
+	var1 = 20;
+	ptr  = &var0;
+	printf("Data_var0 = %d. data_ptr = %#x. data2_ptr = %p. deref_ptr = %d. \n", var0, ptr, ptr, *ptr);
+	*ptr += 34;
+	printf("New value for var0. Data_var0 = %d. data_ptr = %#x. data2_ptr = %p. deref_ptr = %d. \n", var0, ptr, ptr, *ptr);
+	ptr  = &var1;
+	printf("New value for ptr. data_ptr = %#x. deref_ptr = %d.  \n", ptr, *ptr);
 }
 //====================================================================
 
 
 /* Указатель как аргумент */
-void change (int *pa){
-	*pa += 25;
+void arg_func (int *pa){
+	int		temp;
+	int		*t_pb = pa;
+	//----------------------------------
+	
+	printf("\n    This is \"arg_func\" \n");
+	printf("Data_pa = %p. deref_pa = %d. \n", pa, *pa);
+	*pa *= 4;
+	printf("Data_pa = %p. deref_pa = %d. \n", pa, *pa);
+	
+	t_pb = &temp;
+	printf("Unknown temp_address & temp_value. Data_pb = %p. deref_pb = %d. \n", t_pb, *t_pb);
+	*pa = *t_pb;
+	
 }
 //====================================================================
 
 
 
-/* Проверка логина */
-int	login_check(){
+/* Указатель и массив */
+void	array_func(){
 	char	master_login[] = "family";			//исходник.
-	char	slave_login[LOGIN_MAX];						//получаемый логин.
+	char	*ptr_master = master_login;			//указатель на массив "master_login"
+	int		num_array[] = {5, 10, 15, 20, 25, 30};
+	int		*num_ptr = num_array;
+	int		s_num = sizeof(num_array) / sizeof(int);
 	int		i=0;
 	//----------------------------------
 	
-	printf("Hello! I'm func \"login_check\". \n");
-	printf("Enter login:  ");
-	scanf("%s", /* (LOGIN_MAX-1), */ slave_login);	//защитить буфер от переполнения
+	printf("\n    This is \"array_func\" \n");
+	printf("Master array by ptr_master: ");
+	while(*ptr_master != '\0'){
+		putchar(*ptr_master);//printf("%c", *ptr_master);
+		ptr_master++;
+	}
+	printf("\n");
+	ptr_master = master_login;
 	
-	for(i=0; (slave_login[i])!='\0' && i<LOGIN_MAX; i++){
-		if((slave_login[i]) != master_login[i]){
-			printf("Login is uncorrect 1. i = %d. Your enter: %s. \n", i, slave_login);
-			return 0;
-		}
-	}
+	master_login[2] = 'k';
+	printf("New master array: %s. \n", master_login);
+	*(ptr_master + 2) = 'm';
+	printf("Prev master array by pointer: %s. \n", master_login);
+	ptr_master = master_login;
 	
-	//Проверка на полный логин или переполнение scanf.
-	if (master_login[i] != '\0') {
-		printf("Login is uncorrect 2. i = %d . Incomplete login. Your enter: %s. \n", i, slave_login);
-		return 0;
+	printf("Size of num_array = %d. \n", s_num);
+	printf("Print num queue: ");
+	for(i=0; i<6; i++){
+		printf(" %d ", *(num_ptr+i) );
 	}
-	else {
-		printf("Login correct. I = %d. slave_login = %s. \n", i, slave_login);
-		return 1;
-	}
+	num_ptr = num_array;
+	printf("\n");
+	
 }
 //====================================================================
