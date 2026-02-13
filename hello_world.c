@@ -16,7 +16,7 @@
 void	defin_func ( );			//объявить указатель и переменную. вывести результаты работы на ними.
 void	arg_func (int *pa);		//указатель как аргумент функции. Т.е. функция меняет переменные в программе без создания копий.
 void	array_func();			//указатель и массив.
-int		*retu_func ();
+void	multiarr_func ();		//указатель и многомерный массив.
 //====================================================================
 
 
@@ -33,7 +33,7 @@ void	main(){
 	arg_func(&var1);
 	printf("Data_var1 = %d. address_var = %p. \n", var1, &var1);
 	array_func( );
-	
+	multiarr_func();
 	printf("\a");
 }
 //====================================================================
@@ -112,5 +112,27 @@ void	array_func(){
 	num_ptr = num_array;
 	printf("\n");
 	
+}
+//====================================================================
+
+
+
+/* многомерный массив */
+void	multiarr_func (){
+	char	mult_arr[3][20] = {
+		"Lazarew",
+		"Dmitriy",
+		"Vladimirovich"
+	};
+	char	(*ptr_arr)[20] = mult_arr;
+	//----------------------------------	
+
+	printf("\n    This is \"multiarr_func\" \n");
+	printf("Print multi array: \n");
+	for(int i=0; i<3; i++){
+		printf("%s \n",*(ptr_arr+i));
+	}
+	ptr_arr = mult_arr;
+	printf("Check pointer: %s. \n", ptr_arr);
 }
 //====================================================================
