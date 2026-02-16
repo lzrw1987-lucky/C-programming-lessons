@@ -17,6 +17,7 @@ void	defin_func ( );			//объявить указатель и переменн
 void	arg_func (int *pa);		//указатель как аргумент функции. Т.е. функция меняет переменные в программе без создания копий.
 void	array_func();			//указатель и массив.
 void	multiarr_func ();		//указатель и многомерный массив.
+void	storage_class_func(void);//указатели и разные классы переменных
 //====================================================================
 
 
@@ -34,6 +35,8 @@ void	main(){
 	printf("Data_var1 = %d. address_var = %p. \n", var1, &var1);
 	array_func( );
 	multiarr_func();
+	storage_class_func( );
+	
 	printf("\a");
 }
 //====================================================================
@@ -124,7 +127,9 @@ void	multiarr_func (){
 		"Dmitriy",
 		"Vladimirovich"
 	};
-	char	(*ptr_arr)[20] = mult_arr;
+	char	(*ptr_arr)[20] = mult_arr;			//указатель на многомерный массив!!!
+	int		array [5][10];						//многомерный массив.
+	int		*ptr_array[5];						//массив указателей.
 	//----------------------------------	
 
 	printf("\n    This is \"multiarr_func\" \n");
@@ -134,5 +139,53 @@ void	multiarr_func (){
 	}
 	ptr_arr = mult_arr;
 	printf("Check pointer: %s. \n", ptr_arr);
+	
+	//определение строк массива
+	printf("Define array matrix: \n");
+	for(int i=0; i < 5; i++){
+		for(int j=0; j < 10; j++){
+			array[i][j] = i + j*2 + 3;//2^(i%3);
+			printf("%d  ",array[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n Sorting for array: \n");
+	ptr_array[0] = &array[3][0];
+	ptr_array[1] = &array[4][0];
+	ptr_array[2] = &array[0][0];
+	ptr_array[3] = &array[2][0];
+	ptr_array[4] = &array[1][0];
+	
+	int		length = sizeof(array[0])/sizeof(int);
+	printf("\n Enter new matrix: \n");
+	for(int i=0; i<5; i++){
+		for(int j=0; j<length;j++){
+			printf("%d  ",*(ptr_array[i]+j) );
+		}
+		printf("\n");
+	}
+}
+//====================================================================
+
+
+
+/* Разные классы переменных */
+void	storage_class_func( ){
+	const int		a0 = 10;
+	int				bob = 20;
+	const int		*pa0 = &a0;			//указатель на константу. Может содержать другой адрес. Может указывать на константу.
+	int	*const		pc = &bob; 			//константый указатель. Он не может содержать другой адрес. Только меняет значение по этому адресу.
+	//----------------------------------
+
+
+	printf("\n    This is \"storage_class_func\" \n");
+	printf("Var a0 = %d; addr a0 = %p. \n", a0, pa0);
+	
+	pa0 = &bob;
+	printf("Var bob = %d; addr bob = %p. \n", bob, pa0);
+	
+	printf("Const ptr. var_bob = %d. addr_bob = %p. \n", *pc, pc);
+	printf("Const ptr. New var_bob = %d. addr_bob = %p. \n", (*pc + 26), pc);
+	
 }
 //====================================================================
