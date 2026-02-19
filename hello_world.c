@@ -18,6 +18,7 @@ void	arg_func (int *pa);		//указатель как аргумент функ�
 void	array_func();			//указатель и массив.
 void	multiarr_func ();		//указатель и многомерный массив.
 void	storage_class_func(void);//указатели и разные классы переменных
+void	func_ptr (void);		//Указатель на функцию.
 //====================================================================
 
 
@@ -36,6 +37,7 @@ void	main(){
 	array_func( );
 	multiarr_func();
 	storage_class_func( );
+	func_ptr( );
 	
 	printf("\a");
 }
@@ -187,5 +189,20 @@ void	storage_class_func( ){
 	printf("Const ptr. var_bob = %d. addr_bob = %p. \n", *pc, pc);
 	printf("Const ptr. New var_bob = %d. addr_bob = %p. \n", (*pc + 26), pc);
 	
+}
+//====================================================================
+
+
+
+/* Указатель на функцию */
+int add(int a, int b) {return a+b;}
+int sub(int a, int b) {return a-b;}
+void	func_ptr (void){
+	int	(*my_function[])(int a, int b) = {add, sub};		//объявлен указатель на функцию
+	//----------------------------------	
+	
+	printf("\n    This is \"func_ptr\" \n");
+	printf("Pointer on add: result = %d. \n", my_function[0](10, 20));
+	printf("Pointer on sub: result = %d. \n", my_function[1](50, 5));
 }
 //====================================================================
